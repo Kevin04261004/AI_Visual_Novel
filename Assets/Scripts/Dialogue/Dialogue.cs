@@ -15,6 +15,8 @@ public class Dialogue
     public string[] number;
     [Tooltip("스킵라인")]
     public string[] skipnum;
+    [Tooltip("fade 기능")]
+    public string[] fade;
 }
 
 [System.Serializable]

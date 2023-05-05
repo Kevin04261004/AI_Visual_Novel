@@ -5,7 +5,7 @@ using UnityEngine;
 public class DialogueReader : MonoBehaviour
 {
     private InputManager input;
-    private Dialogue[] dialogues;
+    [SerializeField] private Dialogue[] dialogues;
     private Event[] events;
     [SerializeField] private bool isReading = false;
     private float time;
@@ -24,7 +24,7 @@ public class DialogueReader : MonoBehaviour
     }
     public void Update()
     {
-        if (isNeedToClickBtn)
+        if (isNeedToClickBtn || FadeManager.instance.isFading)
             return;
         if (isReading && Input.GetKeyDown(KeyCode.Space))
         {
@@ -65,39 +65,63 @@ public class DialogueReader : MonoBehaviour
             }
             else
             {
-                if (OnlyReadNoPlus)
+                if (!string.IsNullOrEmpty(dialogues[typeIndex].fade[ContextsIndex]) && int.TryParse(dialogues[typeIndex].fade[ContextsIndex], out int Fadenum))
                 {
-                    isTyping = true;
-                    OnlyReadNoPlus = false;
-                    return;
-                }
-                if (typeIndex == dialogues.Length)
-                {
-                    isTyping = false;
-                    isReading = false;
-                    UIManager.instance.TalkPanel_Close();
-                    typeIndex = 0;
+                    if (Fadenum == 0)
+                    {
+                        StartCoroutine(FadeManager.instance.FadeIn());
+                    }
+                    else if (Fadenum == 1)
+                    {
+                        StartCoroutine(FadeManager.instance.FadeOut());
+                    }
+                    else if (Fadenum == 2)
+                    {
+                        StartCoroutine(FadeManager.instance.FlashIn());
+                    }
+                    else if (Fadenum == 3)
+                    {
+                        StartCoroutine(FadeManager.instance.FlashOut());
+                    }
+                    StartCoroutine(fadeAfter());
                 }
                 else
                 {
-                    isTyping = true;
-                    if (dialogues[typeIndex].contexts.Length > ContextsIndex + 1)
+                    if (OnlyReadNoPlus)
                     {
-                        ContextsIndex++;
+                        isTyping = true;
+                        OnlyReadNoPlus = false;
+                        return;
+                    }
+                    if (typeIndex == dialogues.Length)
+                    {
+                        isTyping = false;
+                        isReading = false;
+                        UIManager.instance.TalkPanel_Close();
+                        typeIndex = 0;
                     }
                     else
                     {
-                        if (typeIndex + 1 == dialogues.Length)
+                        isTyping = true;
+                        if (dialogues[typeIndex].contexts.Length > ContextsIndex + 1)
                         {
-                            isTyping = false;
-                            isReading = false;
-                            UIManager.instance.TalkPanel_Close();
-                            typeIndex = -1;
+                            ContextsIndex++;
                         }
-                        typeIndex++;
-                        ContextsIndex = 0;
+                        else
+                        {
+                            if (typeIndex + 1 == dialogues.Length)
+                            {
+                                isTyping = false;
+                                isReading = false;
+                                UIManager.instance.TalkPanel_Close();
+                                typeIndex = -1;
+                            }
+                            typeIndex++;
+                            ContextsIndex = 0;
+                        }
                     }
                 }
+               
             }
         }
     }
@@ -160,5 +184,42 @@ public class DialogueReader : MonoBehaviour
     public void TypeIndexChange(int _typeindex)
     {
         typeIndex = _typeindex;
+    }
+    public IEnumerator fadeAfter()
+    {
+        yield return new WaitForSeconds(FadeManager.instance.FadeInSpeed);
+        if (OnlyReadNoPlus)
+        {
+            isTyping = true;
+            OnlyReadNoPlus = false;
+            yield return null;
+        }
+        if (typeIndex == dialogues.Length)
+        {
+            isTyping = false;
+            isReading = false;
+            UIManager.instance.TalkPanel_Close();
+            typeIndex = 0;
+        }
+        else
+        {
+            isTyping = true;
+            if (dialogues[typeIndex].contexts.Length > ContextsIndex + 1)
+            {
+                ContextsIndex++;
+            }
+            else
+            {
+                if (typeIndex + 1 == dialogues.Length)
+                {
+                    isTyping = false;
+                    isReading = false;
+                    UIManager.instance.TalkPanel_Close();
+                    typeIndex = -1;
+                }
+                typeIndex++;
+                ContextsIndex = 0;
+            }
+        }
     }
 }

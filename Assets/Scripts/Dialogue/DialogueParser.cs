@@ -22,6 +22,7 @@ public class DialogueParser : MonoBehaviour
             List<string> contextList = new List<string>();
             List<string> EventList = new List<string>();
             List<string> SkipList = new List<string>();
+            List<string> FadeList = new List<string>();
             dialogue.name = row[1];
             if(!(row[2] == ""))
             {
@@ -33,6 +34,7 @@ public class DialogueParser : MonoBehaviour
                 contextList.Add(row[3]);
                 EventList.Add(row[4]);
                 SkipList.Add(row[5]);
+                FadeList.Add(row[6]);
                 if (++i < data.Length)
                 {
                     row = data[i].Split(new char[] { ',' });
@@ -45,6 +47,7 @@ public class DialogueParser : MonoBehaviour
             dialogue.contexts = contextList.ToArray();
             dialogue.number = EventList.ToArray();
             dialogue.skipnum = SkipList.ToArray();
+            dialogue.fade = FadeList.ToArray();
 
             dialogueList.Add(dialogue);
         }

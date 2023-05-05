@@ -15,6 +15,7 @@ public class ChangeName : MonoBehaviour
         UIManager.instance.Story_Image.gameObject.SetActive(true);
         UIManager.instance.InputName_Image.gameObject.SetActive(false);
         UIManager.instance.StartPage_Image.gameObject.SetActive(false);
+        StartCoroutine(FadeManager.instance.FadeIn());
     }
 
     public void ChangeFileNames(string fileName)

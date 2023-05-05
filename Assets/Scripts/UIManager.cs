@@ -66,8 +66,9 @@ public class UIManager : Singleton<UIManager>
             content = content.Replace("엄준식", changeName.PlayerName);
             content = content.Replace("준식", changeName.PlayerName);
             content = content.Replace("`", ",");
+
             TalkPanel_Content_TMP.text = content.Substring(0, typingIndex);
-            if(pictureName == "" || pictureName == null)
+            if(string.IsNullOrEmpty(pictureName))
             {
                 ;
             }
@@ -75,11 +76,16 @@ public class UIManager : Singleton<UIManager>
             {
                 StoryBackGroundpicture(pictureName);
             }
+
         }
     }
     public void TalkPanel_Close()
     {
         TalkPanel_Image.gameObject.SetActive(false);
+    }
+    public void TalkPanel_Open()
+    {
+        TalkPanel_Image.gameObject.SetActive(true);
     }
     public void StoryBackGroundpicture(string pictureName)
     {

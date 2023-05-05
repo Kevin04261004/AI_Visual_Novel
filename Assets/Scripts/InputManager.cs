@@ -13,11 +13,12 @@ public class InputManager : MonoBehaviour
         dialogues = gameObject.GetComponent<InteractionEvent>().GetDialogue();
         events = gameObject.GetComponent<InteractionEvent>().GetEvent();
     }
-    void Update()
+    public void StartReading()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !reader.GetisReading())
+        if(isReaded)
         {
-            reader.SetDialogue(dialogues,events);
+            return;
         }
+        reader.SetDialogue(dialogues, events);
     }
 }
