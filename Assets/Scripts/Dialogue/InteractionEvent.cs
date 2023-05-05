@@ -6,9 +6,15 @@ using UnityEngine;
 public class InteractionEvent : MonoBehaviour
 {
     [SerializeField] DialogueEvent dialogue;
+    [SerializeField] Event_GetLine event_getLine;
     public Dialogue[] GetDialogue()
     {
-        dialogue.dialogues = DataBaseManager.instance.GetDialogue((int)dialogue.line.x, (int)dialogue.line.y);
+        dialogue.dialogues = DataBaseManager.instance.GetDialogueALL();
         return dialogue.dialogues;
+    }
+    public Event[] GetEvent()
+    {
+        event_getLine.dialogues = DataBaseManager.instance.GetEventALL();
+        return event_getLine.dialogues;
     }
 }

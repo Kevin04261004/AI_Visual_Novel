@@ -6,10 +6,12 @@ using UnityEngine;
 public class DataBaseManager : MonoBehaviour
 {
     public static DataBaseManager instance;
-    [SerializeField] string csv_FileName;
-
+    [SerializeField] string csv_FileName_Dialogue;
+    [SerializeField] string csv_FileName_Event;
+    private Dialogue[] dialogues;
+    private Event[] events;
     Dictionary<int, Dialogue> dialogueDic = new Dictionary<int, Dialogue>();
-
+    Dictionary<int, Event> eventDic = new Dictionary<int, Event>();
     public static bool isFinish = false;
 
     private void Awake()
@@ -18,23 +20,39 @@ public class DataBaseManager : MonoBehaviour
         {
             instance = this;
             DialogueParser theParser = GetComponent<DialogueParser>();
-            Dialogue[] dialogues = theParser.Parse(csv_FileName);
+            dialogues = theParser.Parse(csv_FileName_Dialogue);
+            events = theParser.ParseEvent(csv_FileName_Event);
             for (int i = 0; i < dialogues.Length; i++)
             {
                 dialogueDic.Add(i + 1, dialogues[i]);
+            }
+            for (int i = 0; i < events.Length; i++)
+            {
+                eventDic.Add(i + 1, events[i]);
             }
             isFinish = true;
         }
     }
 
-    public Dialogue[] GetDialogue(int _StartNum, int _EndNum)
+    public Dialogue[] GetDialogueALL()
     {
         List<Dialogue> dialogueList = new List<Dialogue>();
 
-        for (int i = 0; i <= _EndNum - _StartNum; i++)
+        for (int i = 0; i < dialogues.Length; i++)
         {
-            dialogueList.Add(dialogueDic[_StartNum + i]);
+            dialogueList.Add(dialogueDic[i+1]);
         }
         return dialogueList.ToArray();
     }
+    public Event[] GetEventALL()
+    {
+        List<Event> eventList = new List<Event>();
+
+        for (int i = 0; i < events.Length; i++)
+        {
+            eventList.Add(eventDic[i+1]);
+        }
+        return eventList.ToArray();
+    }
+
 }
