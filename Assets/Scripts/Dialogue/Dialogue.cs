@@ -7,8 +7,10 @@ public class Dialogue
 {
     [Tooltip("대사 치는 캐릭터 이름")]
     public string name;
-    [Tooltip("상대의 얼굴")]
-    public string picture;
+    [Tooltip("배경화면")]
+    public string background;
+    [Tooltip("캐릭터이름_표정")]
+    public string characterPicture;
     [Tooltip("대사 내용")]
     public string[] contexts;
     [Tooltip("이벤트 번호")]

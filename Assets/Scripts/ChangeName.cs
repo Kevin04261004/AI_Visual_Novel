@@ -11,7 +11,12 @@ public class ChangeName : MonoBehaviour
     public string PlayerName;
     public void OnClickOK_Btn()
     {
+        
         PlayerName = NameInput_InputField.text.ToString();
+        if(PlayerName.Length != 3)
+        {
+            return;
+        }
         UIManager.instance.Story_Image.gameObject.SetActive(true);
         UIManager.instance.InputName_Image.gameObject.SetActive(false);
         UIManager.instance.StartPage_Image.gameObject.SetActive(false);

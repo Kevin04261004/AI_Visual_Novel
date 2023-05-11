@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
     public Image StartPage_Image;
     public Image OptionBackGround_Image;
     public Image Story_Image;
+    public Image Character_Image;
     public Image InputName_Image;
     public Button ClickBtn_1;
     public Button ClickBtn_2;
@@ -45,7 +46,7 @@ public class UIManager : Singleton<UIManager>
             TalkPanel_Content_TMP.text = content;
         }
     }
-    public void TalkPanel_Change_WithTyping(string name, string pictureName, string content, int typingIndex = 0)
+    public void TalkPanel_Change_WithTyping(string name, string backgroundName, string characterName, string content, int typingIndex = 0)
     {
         if (!TalkPanel_Image.gameObject.activeSelf)
         {
@@ -64,17 +65,25 @@ public class UIManager : Singleton<UIManager>
             TalkPanel_Name_TMP.text = name;
 
             content = content.Replace("엄준식", changeName.PlayerName);
-            content = content.Replace("준식", changeName.PlayerName);
+            content = content.Replace("준식", changeName.PlayerName.Substring(1,2));
             content = content.Replace("`", ",");
 
             TalkPanel_Content_TMP.text = content.Substring(0, typingIndex);
-            if(string.IsNullOrEmpty(pictureName))
+            if(string.IsNullOrEmpty(backgroundName))
             {
                 ;
             }
             else
             {
-                StoryBackGroundpicture(pictureName);
+                StoryBackGroundpicture(backgroundName);
+            }
+            if (string.IsNullOrEmpty(characterName))
+            {
+                ;
+            }
+            else
+            {
+                Characterpicture(characterName);
             }
 
         }
@@ -91,6 +100,11 @@ public class UIManager : Singleton<UIManager>
     {
         Sprite NeedChangePicture = Resources.Load<Sprite>(pictureName);
         Story_Image.sprite = NeedChangePicture;
+    }
+    public void Characterpicture(string pictureName)
+    {
+        Sprite NeedChangePicture = Resources.Load<Sprite>(pictureName);
+        Character_Image.sprite = NeedChangePicture;
     }
     public void ClickBtns_Change(string text1,int nextNum1, string text2, int nextNum2, string text3 = null, int nextNum3 = 0)
     {

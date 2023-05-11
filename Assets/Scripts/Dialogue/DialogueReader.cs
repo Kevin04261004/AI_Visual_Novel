@@ -69,6 +69,7 @@ public class DialogueReader : MonoBehaviour
                 {
                     if (Fadenum == 0)
                     {
+                        UIManager.instance.StoryBackGroundpicture(dialogues[typeIndex+1].background);
                         StartCoroutine(FadeManager.instance.FadeIn());
                     }
                     else if (Fadenum == 1)
@@ -77,6 +78,7 @@ public class DialogueReader : MonoBehaviour
                     }
                     else if (Fadenum == 2)
                     {
+                        UIManager.instance.StoryBackGroundpicture(dialogues[typeIndex+1].background);
                         StartCoroutine(FadeManager.instance.FlashIn());
                     }
                     else if (Fadenum == 3)
@@ -163,7 +165,7 @@ public class DialogueReader : MonoBehaviour
                 }
                 else
                 {
-                    UIManager.instance.TalkPanel_Change_WithTyping(dialogues[typeIndex].name, dialogues[typeIndex].picture, dialogues[typeIndex].contexts[ContextsIndex], wordIndex);
+                    UIManager.instance.TalkPanel_Change_WithTyping(dialogues[typeIndex].name, dialogues[typeIndex].background, dialogues[typeIndex].characterPicture, dialogues[typeIndex].contexts[ContextsIndex], wordIndex);
                 }
             }
         }
@@ -192,7 +194,7 @@ public class DialogueReader : MonoBehaviour
         {
             isTyping = true;
             OnlyReadNoPlus = false;
-            yield return null;
+            yield break;
         }
         if (typeIndex == dialogues.Length)
         {
