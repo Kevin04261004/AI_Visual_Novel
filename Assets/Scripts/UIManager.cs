@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -103,6 +104,12 @@ public class UIManager : Singleton<UIManager>
     }
     public void Characterpicture(string pictureName)
     {
+        if(pictureName == "x" || pictureName == "X")
+        {
+            Character_Image.gameObject.SetActive(false);
+            return;
+        }
+        Character_Image.gameObject.SetActive(true);
         Sprite NeedChangePicture = Resources.Load<Sprite>(pictureName);
         Character_Image.sprite = NeedChangePicture;
     }

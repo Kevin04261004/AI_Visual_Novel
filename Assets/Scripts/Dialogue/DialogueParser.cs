@@ -29,7 +29,7 @@ public class DialogueParser : MonoBehaviour
             {
                 dialogue.background = row[2];
             }
-            if (!(row[2] == ""))
+            if (!(row[3] == ""))
             {
                 dialogue.characterPicture = row[3];
             }
