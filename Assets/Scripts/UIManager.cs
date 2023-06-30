@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
@@ -14,16 +15,18 @@ public class UIManager : Singleton<UIManager>
     public Image Story_Image;
     public Image Character_Image;
     public Image InputName_Image;
-    public Button ClickBtn_1;
-    public Button ClickBtn_2;
-    public Button ClickBtn_3;
+    public Image RealExit_Image;
+    public Button ClickBtn_1_Btn;
+    public Button ClickBtn_2_Btn;
+    public Button ClickBtn_3_Btn;
+    public Button Exit_Btn;
+    public Button ExitNope_Btn;
     public TextMeshProUGUI ClickBtn_1_TMP;
     public TextMeshProUGUI ClickBtn_2_TMP;
     public TextMeshProUGUI ClickBtn_3_TMP;
     [SerializeField] private GameObject TalkPanel_Image;
     [SerializeField] private TextMeshProUGUI TalkPanel_Name_TMP;
     [SerializeField] private TextMeshProUGUI TalkPanel_Content_TMP;
-
     public void TalkPanel_Change(string name, string content = null)
     {
         if (!TalkPanel_Image.gameObject.activeSelf)
@@ -117,20 +120,20 @@ public class UIManager : Singleton<UIManager>
     {
         if(text3 == null || text3 == "")
         {
-            ClickBtn_1.gameObject.SetActive(true);
+            ClickBtn_1_Btn.gameObject.SetActive(true);
             clickBtn.ChangeNum1 = nextNum1;
-            ClickBtn_2.gameObject.SetActive(true);
+            ClickBtn_2_Btn.gameObject.SetActive(true);
             clickBtn.ChangeNum2 = nextNum2;
             ClickBtn_1_TMP.text = text1;
             ClickBtn_2_TMP.text = text2;
         }
         else
         {
-            ClickBtn_1.gameObject.SetActive(true);
+            ClickBtn_1_Btn.gameObject.SetActive(true);
             clickBtn.ChangeNum1 = nextNum1;
-            ClickBtn_2.gameObject.SetActive(true);
+            ClickBtn_2_Btn.gameObject.SetActive(true);
             clickBtn.ChangeNum2 = nextNum2;
-            ClickBtn_3.gameObject.SetActive(true);
+            ClickBtn_3_Btn.gameObject.SetActive(true);
             clickBtn.ChangeNum3 = nextNum3;
             ClickBtn_1_TMP.text = text1;
             ClickBtn_2_TMP.text = text2;

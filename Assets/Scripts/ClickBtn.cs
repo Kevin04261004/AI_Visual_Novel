@@ -13,25 +13,25 @@ public class ClickBtn : MonoBehaviour
     public int ChangeNum3;
     public void OnClickClickBtn_1()
     {
-        UIManager.instance.ClickBtn_1.gameObject.SetActive(false);
-        UIManager.instance.ClickBtn_2.gameObject.SetActive(false);
-        UIManager.instance.ClickBtn_3.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_1_Btn.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_2_Btn.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_3_Btn.gameObject.SetActive(false);
         reader.isNeedToClickBtnFalse();
         reader.TypeIndexChange(ChangeNum1-2);
     }
     public void OnClickClickBtn_2()
     {
-        UIManager.instance.ClickBtn_1.gameObject.SetActive(false);
-        UIManager.instance.ClickBtn_2.gameObject.SetActive(false);
-        UIManager.instance.ClickBtn_3.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_1_Btn.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_2_Btn.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_3_Btn.gameObject.SetActive(false);
         reader.isNeedToClickBtnFalse();
         reader.TypeIndexChange(ChangeNum2 - 2);
     }
     public void OnClickClickBtn_3()
     {
-        UIManager.instance.ClickBtn_1.gameObject.SetActive(false);
-        UIManager.instance.ClickBtn_2.gameObject.SetActive(false);
-        UIManager.instance.ClickBtn_3.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_1_Btn.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_2_Btn.gameObject.SetActive(false);
+        UIManager.instance.ClickBtn_3_Btn.gameObject.SetActive(false);
         reader.isNeedToClickBtnFalse();
         reader.TypeIndexChange(ChangeNum3 - 2);
     }
